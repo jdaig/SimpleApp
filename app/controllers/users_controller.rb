@@ -1,6 +1,18 @@
 class UsersController < ApplicationController
+<<<<<<< HEAD
   before_action :logged_in_user, only: [:edit, :update]
   before_action :correct_user,   only: [:edit, :update]
+=======
+  before_action :logged_in_user, only: [:index, :edit, :update]
+  before_action :correct_user,   only: [:edit, :update]
+
+  def index 
+    # Tenemos que hacer una variable que contiene
+    # los usuarios de todo el sitio y luego representar cada uno
+    # por iteración a través de ellos en la vista de índice.
+  end
+
+>>>>>>> updating-users_index-users
   def show
     @user = User.find(params[:id])
   end
@@ -45,6 +57,7 @@ class UsersController < ApplicationController
     # Confirms a logged-in user.
     def logged_in_user
       unless logged_in?
+        store_location
         flash[:danger] = "Please log in."
         redirect_to login_url
       end
