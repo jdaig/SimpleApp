@@ -1,8 +1,4 @@
 class UsersController < ApplicationController
-<<<<<<< HEAD
-  before_action :logged_in_user, only: [:edit, :update]
-  before_action :correct_user,   only: [:edit, :update]
-=======
   before_action :logged_in_user, only: [:index, :edit, :update]
   before_action :correct_user,   only: [:edit, :update]
 
@@ -10,9 +6,12 @@ class UsersController < ApplicationController
     # Tenemos que hacer una variable que contiene
     # los usuarios de todo el sitio y luego representar cada uno
     # por iteración a través de ellos en la vista de índice.
+    
+    # @users = User.all
+
+    @users = User.paginate(page: params[:page])
   end
 
->>>>>>> updating-users_index-users
   def show
     @user = User.find(params[:id])
   end
@@ -63,7 +62,6 @@ class UsersController < ApplicationController
       end
     end
 
-    # Confirms the correct user.
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_url) unless current_user?(@user)
